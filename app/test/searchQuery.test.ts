@@ -105,6 +105,21 @@ describe('search dates', () => {
     expect(parse('feb 29 2025').date).toBeUndefined()
   })
 
+  it('reads Portuguese periods, and English dates in a Portuguese interface', () => {
+    const pt = (query: string) => parseSearchQuery(query, { now, locale: 'pt-BR', language: 'pt-BR' })
+    // pt-BR weeks start on Sunday
+    expect(pt('revisão semana passada')).toMatchObject({ text: 'revisão', date: { start: at(11, 1), end: at(11, 8) } })
+    expect(pt('esta semana').date).toEqual({ start: at(11, 8), end: at(11, 15) })
+    expect(pt('mês passado').date).toEqual({ start: at(10, 1), end: at(11, 1) })
+    expect(pt('este mes').date).toEqual({ start: at(11, 1), end: at(12, 1) })
+    expect(pt('últimos 3 dias').date).toEqual({ start: at(11, 10), end: at(11, 13) })
+    expect(pt('ultimas 2 semanas').date).toEqual({ start: at(10, 30), end: at(11, 13) })
+    expect(pt('ontem').date).toEqual({ start: at(11, 11), end: at(11, 12) })
+    expect(pt('yesterday').date).toEqual({ start: at(11, 11), end: at(11, 12) })
+    expect(pt('standup nov 10')).toMatchObject({ text: 'standup', date: { start: at(11, 10), end: at(11, 11) } })
+    for (const query of ['semana', 'testa semana', 'esta semanal']) expect(pt(query).date).toBeUndefined()
+  })
+
   it('uses consecutive local midnights across daylight-saving transitions', () => {
     const saved = process.env.TZ
     try {

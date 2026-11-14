@@ -35,21 +35,27 @@ export function parseSearchQuery(query: string, { now = new Date(), locale = new
     dateSpan = span
     text = (query.slice(0, span.start) + ' ' + query.slice(span.end)).replace(/\s+/g, ' ').trim()
   }
-  const period = /\b(?:(this|last) (week|month)|(past|last) (\d+) (days?|weeks?))\b/i.exec(query)
+  // English, then Portuguese ("semana passada", "este mês", "últimos 7 dias"): chrono reads neither language's periods
+  // English, then Portuguese ("semana passada", "este mês", "últimos 7 dias"): chrono reads neither language's periods.
+  // \b is ASCII only, so the Portuguese one checks for letters around it instead
+  const period = /\b(?:(?<which>this|last) (?<unit>week|month)|(?:past|last) (?<count>\d+) (?<span>days?|weeks?))\b/i.exec(query)
+    ?? /(?<![\p{L}\p{N}])(?:est[ae] (?<unit>semana|m[eê]s)|(?<lastUnit>semana|m[eê]s) passad[ao]|[uú]ltim[ao]s (?<count>\d+) (?<span>dias?|semanas?))(?![\p{L}\p{N}])/iu.exec(query)
   if (period) {
+    const g = period.groups!
+    const last = g.which?.toLowerCase() === 'last' || !!g.lastUnit
     let start: Date, end: Date
-    if (period[4]) {
+    if (g.count) {
       // Rolling ranges include today: the past seven days are seven local calendar days.
-      const count = Number(period[4]) * (period[5].toLowerCase().startsWith('week') ? 7 : 1)
+      const count = Number(g.count) * (/^(week|semana)/i.test(g.span) ? 7 : 1)
       start = day(1 - count); end = day(1)
-    } else if (period[2].toLowerCase() === 'month') {
-      const offset = period[1].toLowerCase() === 'last' ? -1 : 0
+    } else if (/^m/i.test(g.unit ?? g.lastUnit)) {
+      const offset = last ? -1 : 0
       start = new Date(now.getFullYear(), now.getMonth() + offset, 1)
       end = new Date(now.getFullYear(), now.getMonth() + offset + 1, 1)
     } else {
       const info = new Intl.Locale(locale) as Intl.Locale & { getWeekInfo?: () => { firstDay: number }; weekInfo?: { firstDay: number } }
       const first = info.getWeekInfo?.().firstDay ?? info.weekInfo?.firstDay ?? 1
-      const offset = -((now.getDay() - first + 7) % 7) - (period[1].toLowerCase() === 'last' ? 7 : 0)
+      const offset = -((now.getDay() - first + 7) % 7) - (last ? 7 : 0)
       start = day(offset); end = day(offset + 7)
     }
     consume({ start: period.index, end: period.index + period[0].length }, start, end)
@@ -57,10 +63,11 @@ export function parseSearchQuery(query: string, { now = new Date(), locale = new
     const fields = new Intl.DateTimeFormat(locale).formatToParts(new Date(2001, 10, 22)).map(p => p.type)
     const dayFirst = fields.indexOf('day') < fields.indexOf('month')
     const lang = language.toLowerCase()
-    let parser = parsers[lang] ?? parsers[lang.split('-')[0]] ?? en
-    if (parser === en && dayFirst) parser = GB
+    const own = parsers[lang] ?? parsers[lang.split('-')[0]] ?? en
     const midnight = (c: ParsedComponents) => new Date(c.get('year')!, c.get('month')! - 1, c.get('day')!)
-    for (const result of parser.parse(query, now)) {
+    // the interface's language first; English ("today", "nov 10") is understood in every language when that finds no date.
+    // Plain en there, not GB: GB reads "nov 10" as November 2010, and the numeric check below still keeps the day first
+    for (const parser of own === en ? [dayFirst ? GB : en] : [own, en]) for (const result of date ? [] : parser.parse(query, now)) {
       const start = midnight(result.start), last = midnight(result.end ?? result.start)
       const span = { start: result.index, end: result.index + result.text.trimEnd().length }
       const before = query.slice(0, span.start)
