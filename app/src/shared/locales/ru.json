@@ -705,5 +705,12 @@
   "Keep audio recordings after meetings": "Хранить аудиозаписи после встреч",
   "Recording deleted": "Запись удалена",
   "When off, new meetings' audio is deleted once the summary is saved.": "Если выключено, аудио новых встреч удаляется после сохранения сводки.",
-  "New recording": "Новая запись"
+  "New recording": "Новая запись",
+  "Write notes and answers with Claude": "Писать заметки и ответы с помощью Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Когда включено, ваши расшифровки и заметки отправляются в Anthropic, чтобы написать заметки и ответить на вопросы. Запись, расшифровка и поиск остаются на этом компьютере.",
+  "API key": "Ключ API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Ключ сохранён и зашифрован на этом компьютере. Введите другой, чтобы заменить его.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "С сайта platform.claude.com. Пока ключ не сохранён, заметки продолжает писать локальная модель.",
+  "Forget key": "Забыть ключ",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Использует Claude Code, установленный на этом компьютере, в который выполнен вход, с вашим собственным тарифом Claude. Yogurt никогда не видит ваши данные для входа."
 }

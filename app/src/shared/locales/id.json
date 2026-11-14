@@ -630,5 +630,12 @@
   "Keep audio recordings after meetings": "Simpan rekaman audio setelah rapat",
   "Recording deleted": "Rekaman dihapus",
   "When off, new meetings' audio is deleted once the summary is saved.": "Jika dimatikan, audio rapat baru dihapus setelah ringkasan tersimpan.",
-  "New recording": "Rekaman baru"
+  "New recording": "Rekaman baru",
+  "Write notes and answers with Claude": "Tulis catatan dan jawaban dengan Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Jika aktif, transkrip dan catatan Anda dikirim ke Anthropic untuk menulis catatan dan menjawab pertanyaan. Perekaman, transkripsi, dan pencarian tetap di komputer ini.",
+  "API key": "Kunci API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Sebuah kunci tersimpan, terenkripsi di komputer ini. Ketik kunci lain untuk menggantinya.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Dari platform.claude.com. Sampai ada kunci yang tersimpan, model lokal tetap menulis catatan Anda.",
+  "Forget key": "Lupakan kunci",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Menggunakan Claude Code yang terpasang dan sudah masuk di komputer ini, dengan paket Claude Anda sendiri. Yogurt tidak pernah melihat login Anda."
 }

@@ -630,5 +630,12 @@
   "Keep audio recordings after meetings": "会議後も録音を保存",
   "Recording deleted": "録音を削除しました",
   "When off, new meetings' audio is deleted once the summary is saved.": "オフにすると、新しい会議の音声は要約の保存後に削除されます。",
-  "New recording": "新規録音"
+  "New recording": "新規録音",
+  "Write notes and answers with Claude": "Claude でノートと回答を作成",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "オンにすると、ノートの作成と質問への回答のために、文字起こしとノートが Anthropic に送信されます。録音、文字起こし、検索はこのコンピュータ上で行われます。",
+  "API key": "API キー",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "キーが保存され、このコンピュータ上で暗号化されています。置き換えるには別のキーを入力してください。",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "platform.claude.com で取得できます。キーが保存されるまでは、ローカルモデルが引き続きノートを作成します。",
+  "Forget key": "キーを削除",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "このコンピュータにインストールされ、サインイン済みの Claude Code を、ご自身の Claude プランで使用します。Yogurt がログイン情報を見ることはありません。"
 }

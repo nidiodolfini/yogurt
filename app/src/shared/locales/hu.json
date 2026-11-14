@@ -666,5 +666,12 @@
   "Keep audio recordings after meetings": "Hangfelvételek megőrzése a megbeszélések után",
   "Recording deleted": "Felvétel törölve",
   "When off, new meetings' audio is deleted once the summary is saved.": "Kikapcsolva az új megbeszélések hangja az összefoglaló mentése után törlődik.",
-  "New recording": "Új felvétel"
+  "New recording": "Új felvétel",
+  "Write notes and answers with Claude": "Jegyzetek és válaszok írása a Claude-dal",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Ha be van kapcsolva, az átiratokat és a jegyzeteket elküldjük az Anthropicnak a jegyzetek megírásához és a kérdések megválaszolásához. A felvétel, az átírás és a keresés ezen a számítógépen marad.",
+  "API key": "API-kulcs",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Egy kulcs el van mentve, titkosítva ezen a számítógépen. A cseréjéhez írj be egy másikat.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "A platform.claude.com oldalról. Amíg nincs mentett kulcs, továbbra is a helyi modell írja a jegyzeteidet.",
+  "Forget key": "Kulcs elfelejtése",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Az ezen a számítógépen telepített és bejelentkezett Claude Code-ot használja, a saját Claude-előfizetéseddel. A Yogurt soha nem látja a bejelentkezési adataidat."
 }

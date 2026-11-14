@@ -678,5 +678,12 @@
   "Keep audio recordings after meetings": "Behåll ljudinspelningar efter möten",
   "Recording deleted": "Inspelning raderad",
   "When off, new meetings' audio is deleted once the summary is saved.": "När avstängt raderas nya mötens ljud när sammanfattningen har sparats.",
-  "New recording": "Ny inspelning"
+  "New recording": "Ny inspelning",
+  "Write notes and answers with Claude": "Skriv anteckningar och svar med Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "När detta är på skickas dina transkriptioner och anteckningar till Anthropic för att skriva anteckningarna och svara på frågor. Inspelning, transkribering och sökning stannar på den här datorn.",
+  "API key": "API-nyckel",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "En nyckel är sparad, krypterad på den här datorn. Skriv en annan för att ersätta den.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Från platform.claude.com. Tills en nyckel har sparats fortsätter den lokala modellen att skriva dina anteckningar.",
+  "Forget key": "Glöm nyckel",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Använder den Claude Code som är installerad och inloggad på den här datorn, med din egen Claude-plan. Yogurt ser aldrig din inloggning."
 }

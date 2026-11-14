@@ -630,5 +630,12 @@
   "Keep audio recordings after meetings": "회의 후 녹음 보관",
   "Recording deleted": "녹음이 삭제되었습니다",
   "When off, new meetings' audio is deleted once the summary is saved.": "끄면 새 회의의 오디오가 요약 저장 후 삭제됩니다.",
-  "New recording": "새 녹음"
+  "New recording": "새 녹음",
+  "Write notes and answers with Claude": "Claude로 노트와 답변 작성",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "켜면 노트를 작성하고 질문에 답하기 위해 전사 내용과 노트가 Anthropic으로 전송됩니다. 녹음, 전사, 검색은 이 컴퓨터에서 이루어집니다.",
+  "API key": "API 키",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "키가 이 컴퓨터에 암호화되어 저장되어 있습니다. 바꾸려면 다른 키를 입력하세요.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "platform.claude.com에서 받을 수 있습니다. 키가 저장되기 전까지는 로컬 모델이 계속 노트를 작성합니다.",
+  "Forget key": "키 삭제",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "이 컴퓨터에 설치되어 로그인된 Claude Code를 본인의 Claude 요금제로 사용합니다. Yogurt는 로그인 정보를 절대 보지 않습니다."
 }

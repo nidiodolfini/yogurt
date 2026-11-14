@@ -666,5 +666,12 @@
   "Keep audio recordings after meetings": "Toplantılardan sonra ses kayıtlarını sakla",
   "Recording deleted": "Kayıt silindi",
   "When off, new meetings' audio is deleted once the summary is saved.": "Kapalıyken yeni toplantıların sesi özet kaydedilince silinir.",
-  "New recording": "Yeni kayıt"
+  "New recording": "Yeni kayıt",
+  "Write notes and answers with Claude": "Notları ve yanıtları Claude ile yaz",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Açıkken, notları yazmak ve soruları yanıtlamak için dökümleriniz ve notlarınız Anthropic'e gönderilir. Kayıt, döküm ve arama bu bilgisayarda kalır.",
+  "API key": "API anahtarı",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Bir anahtar kayıtlı ve bu bilgisayarda şifrelenmiş durumda. Değiştirmek için başka bir anahtar yazın.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "platform.claude.com adresinden. Bir anahtar kaydedilene kadar notlarınızı yerel model yazmaya devam eder.",
+  "Forget key": "Anahtarı unut",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Bu bilgisayarda kurulu ve oturum açılmış Claude Code'u kendi Claude planınızla kullanır. Yogurt oturum bilgilerinizi asla görmez."
 }

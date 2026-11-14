@@ -678,5 +678,12 @@
   "Keep audio recordings after meetings": "Διατήρηση ηχογραφήσεων μετά τις συναντήσεις",
   "Recording deleted": "Η ηχογράφηση διαγράφηκε",
   "When off, new meetings' audio is deleted once the summary is saved.": "Αν κλείσει, ο ήχος νέων συναντήσεων διαγράφεται μόλις σωθεί η σύνοψη.",
-  "New recording": "Νέα ηχογράφηση"
+  "New recording": "Νέα ηχογράφηση",
+  "Write notes and answers with Claude": "Σύνταξη σημειώσεων και απαντήσεων με το Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Όταν είναι ενεργό, οι απομαγνητοφωνήσεις και οι σημειώσεις σας αποστέλλονται στην Anthropic για τη σύνταξη των σημειώσεων και την απάντηση ερωτήσεων. Η εγγραφή, η απομαγνητοφώνηση και η αναζήτηση παραμένουν σε αυτόν τον υπολογιστή.",
+  "API key": "Κλειδί API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Ένα κλειδί είναι αποθηκευμένο, κρυπτογραφημένο σε αυτόν τον υπολογιστή. Πληκτρολογήστε άλλο για να το αντικαταστήσετε.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Από το platform.claude.com. Μέχρι να αποθηκευτεί κλειδί, το τοπικό μοντέλο συνεχίζει να γράφει τις σημειώσεις σας.",
+  "Forget key": "Διαγραφή κλειδιού",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Χρησιμοποιεί το Claude Code που είναι εγκατεστημένο και συνδεδεμένο σε αυτόν τον υπολογιστή, με το δικό σας πρόγραμμα Claude. Το Yogurt δεν βλέπει ποτέ τα στοιχεία σύνδεσής σας."
 }

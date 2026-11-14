@@ -678,5 +678,12 @@
   "Keep audio recordings after meetings": "Säilytä äänitallenteet kokousten jälkeen",
   "Recording deleted": "Tallenne poistettu",
   "When off, new meetings' audio is deleted once the summary is saved.": "Pois päältä uusien kokousten ääni poistetaan yhteenvedon tallennuttua.",
-  "New recording": "Uusi tallennus"
+  "New recording": "Uusi tallennus",
+  "Write notes and answers with Claude": "Kirjoita muistiinpanot ja vastaukset Claudella",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Kun tämä on päällä, litterointisi ja muistiinpanosi lähetetään Anthropicille muistiinpanojen kirjoittamista ja kysymyksiin vastaamista varten. Tallennus, litterointi ja haku pysyvät tällä tietokoneella.",
+  "API key": "API-avain",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Avain on tallennettu salattuna tälle tietokoneelle. Korvaa se kirjoittamalla toinen.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Osoitteesta platform.claude.com. Kunnes avain on tallennettu, paikallinen malli kirjoittaa edelleen muistiinpanosi.",
+  "Forget key": "Unohda avain",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Käyttää tälle tietokoneelle asennettua ja kirjautunutta Claude Codea omalla Claude-tilauksellasi. Yogurt ei koskaan näe kirjautumistietojasi."
 }

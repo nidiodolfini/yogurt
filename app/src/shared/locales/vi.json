@@ -630,5 +630,12 @@
   "Keep audio recordings after meetings": "Giữ bản ghi âm sau cuộc họp",
   "Recording deleted": "Đã xóa bản ghi",
   "When off, new meetings' audio is deleted once the summary is saved.": "Khi tắt, âm thanh cuộc họp mới sẽ bị xóa sau khi lưu tóm tắt.",
-  "New recording": "Bản ghi mới"
+  "New recording": "Bản ghi mới",
+  "Write notes and answers with Claude": "Viết ghi chú và câu trả lời bằng Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Khi bật, bản chép lời và ghi chú của bạn được gửi tới Anthropic để viết ghi chú và trả lời câu hỏi. Việc ghi âm, chép lời và tìm kiếm vẫn ở trên máy tính này.",
+  "API key": "Khóa API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Một khóa đã được lưu, mã hóa trên máy tính này. Nhập khóa khác để thay thế.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Từ platform.claude.com. Cho đến khi có khóa được lưu, mô hình cục bộ vẫn tiếp tục viết ghi chú cho bạn.",
+  "Forget key": "Quên khóa",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Dùng Claude Code đã cài đặt và đăng nhập trên máy tính này, với gói Claude của riêng bạn. Yogurt không bao giờ thấy thông tin đăng nhập của bạn."
 }

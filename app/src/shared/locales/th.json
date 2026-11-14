@@ -630,5 +630,12 @@
   "Keep audio recordings after meetings": "เก็บเสียงบันทึกหลังประชุม",
   "Recording deleted": "ลบเสียงบันทึกแล้ว",
   "When off, new meetings' audio is deleted once the summary is saved.": "เมื่อปิด เสียงของการประชุมใหม่จะถูกลบหลังบันทึกสรุปแล้ว",
-  "New recording": "การบันทึกใหม่"
+  "New recording": "การบันทึกใหม่",
+  "Write notes and answers with Claude": "เขียนโน้ตและคำตอบด้วย Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "เมื่อเปิดใช้งาน บทถอดเสียงและโน้ตของคุณจะถูกส่งไปยัง Anthropic เพื่อเขียนโน้ตและตอบคำถาม การบันทึกเสียง การถอดเสียง และการค้นหายังคงอยู่บนคอมพิวเตอร์เครื่องนี้",
+  "API key": "คีย์ API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "มีคีย์ที่บันทึกไว้และเข้ารหัสบนคอมพิวเตอร์เครื่องนี้ พิมพ์คีย์อื่นเพื่อแทนที่",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "จาก platform.claude.com โมเดลในเครื่องจะเขียนโน้ตของคุณต่อไปจนกว่าจะมีการบันทึกคีย์",
+  "Forget key": "ลืมคีย์",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "ใช้ Claude Code ที่ติดตั้งและลงชื่อเข้าใช้อยู่บนคอมพิวเตอร์เครื่องนี้ ด้วยแพ็กเกจ Claude ของคุณเอง Yogurt ไม่เคยเห็นข้อมูลการเข้าสู่ระบบของคุณ"
 }

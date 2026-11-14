@@ -630,5 +630,12 @@
   "Keep audio recordings after meetings": "會後保留錄音",
   "Recording deleted": "錄音已刪除",
   "When off, new meetings' audio is deleted once the summary is saved.": "關閉後，新會議的音訊將在摘要儲存後刪除。",
-  "New recording": "新增錄音"
+  "New recording": "新增錄音",
+  "Write notes and answers with Claude": "使用 Claude 撰寫筆記和回答",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "開啟後，你的逐字稿和筆記會傳送給 Anthropic，用來撰寫筆記和回答問題。錄音、轉錄和搜尋仍在這部電腦上進行。",
+  "API key": "API 金鑰",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "已儲存一組金鑰，並在這部電腦上加密。輸入另一組即可取代。",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "來自 platform.claude.com。在儲存金鑰之前，本機模型會繼續撰寫你的筆記。",
+  "Forget key": "忘記金鑰",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "使用這部電腦上已安裝並登入的 Claude Code，以及你自己的 Claude 方案。Yogurt 永遠看不到你的登入資訊。"
 }

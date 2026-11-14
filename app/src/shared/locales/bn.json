@@ -666,5 +666,12 @@
   "Keep audio recordings after meetings": "মিটিংয়ের পরে অডিও রেকর্ডিং রাখুন",
   "Recording deleted": "রেকর্ডিং মোছা হয়েছে",
   "When off, new meetings' audio is deleted once the summary is saved.": "বন্ধ থাকলে সারাংশ সেভের পর নতুন মিটিংয়ের অডিও মুছবে।",
-  "New recording": "নতুন রেকর্ডিং"
+  "New recording": "নতুন রেকর্ডিং",
+  "Write notes and answers with Claude": "Claude দিয়ে নোট ও উত্তর লিখুন",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "চালু থাকলে, নোট লিখতে ও প্রশ্নের উত্তর দিতে আপনার ট্রান্সক্রিপ্ট ও নোট Anthropic-এ পাঠানো হয়। রেকর্ডিং, ট্রান্সক্রিপশন ও অনুসন্ধান এই কম্পিউটারেই থাকে।",
+  "API key": "API কী",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "একটি কী এই কম্পিউটারে এনক্রিপ্ট করে সংরক্ষিত আছে। বদলাতে অন্য একটি লিখুন।",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "platform.claude.com থেকে। কী সংরক্ষিত না হওয়া পর্যন্ত স্থানীয় মডেলই আপনার নোট লিখতে থাকবে।",
+  "Forget key": "কী ভুলে যান",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "এই কম্পিউটারে ইনস্টল ও সাইন ইন করা Claude Code ব্যবহার করে, আপনার নিজের Claude প্ল্যানে। Yogurt কখনও আপনার লগইন দেখে না।"
 }

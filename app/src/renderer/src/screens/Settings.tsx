@@ -384,8 +384,6 @@ function AiApps() {
 
 /**
  * Claude in place of the local model for notes and answers: off until picked, and it says what then leaves the computer.
- * ponytail: this fork's own section, written in Brazilian Portuguese whatever the interface language; wrap its text in t()
- * (English keys) and add it to every locales/*.json to have it follow the language picked.
  */
 function ClaudeSetting({ via, hasKey, onVia, onKey }: { via: ClaudeVia | 'off'; hasKey: boolean; onVia(v: ClaudeVia | 'off'): void; /** blank forgets the saved key */ onKey(key: string): void }) {
   const [key, setKey] = useState('')
@@ -397,13 +395,13 @@ function ClaudeSetting({ via, hasKey, onVia, onKey }: { via: ClaudeVia | 'off'; 
       <div data-testid="settings-claude" className="settings-group">
         <div className="settings-row">
           <div className="settings-row-copy">
-            <label htmlFor="settings-claude-via" className="settings-label">Escrever notas e respostas com o Claude</label>
-            <p className="settings-description">Com isto ligado, suas transcrições e notas são enviadas à Anthropic para escrever as notas e responder perguntas. Gravação, transcrição e busca continuam neste computador.</p>
+            <label htmlFor="settings-claude-via" className="settings-label">{t('Write notes and answers with Claude')}</label>
+            <p className="settings-description">{t('When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.')}</p>
           </div>
           <span className="settings-select-wrap">
             <select id="settings-claude-via" data-testid="settings-claude-via" value={via} onChange={(e) => onVia(e.target.value as ClaudeVia | 'off')} className="settings-select">
-              <option value="off">Desligado</option>
-              <option value="api">Chave de API</option>
+              <option value="off">{t('Off')}</option>
+              <option value="api">{t('API key')}</option>
               <option value="cli">Claude Code</option>
             </select>
             <ChevronDown size={14} aria-hidden="true" />
@@ -412,10 +410,10 @@ function ClaudeSetting({ via, hasKey, onVia, onKey }: { via: ClaudeVia | 'off'; 
         {via === 'api' &&
           <div className="settings-row">
             <div className="settings-row-copy">
-              <label htmlFor="settings-claude-key" className="settings-label">Chave de API</label>
-              <p data-testid="settings-claude-key-status" className="settings-description">
-                {hasKey ? 'Uma chave está salva, cifrada neste computador. Digite outra para substituir.' : 'De platform.claude.com. Enquanto não houver chave salva, o modelo local continua escrevendo suas notas.'}
-                {hasKey && <button data-testid="settings-claude-forget" className="settings-link" onClick={() => onKey('')}>Esquecer chave</button>}
+              <label htmlFor="settings-claude-key" className="settings-label">{t('API key')}</label>
+              <p data-testid="settings-claude-key-status" data-has-key={hasKey} className="settings-description">
+                {hasKey ? t('A key is saved, encrypted on this computer. Type another to replace it.') : t('From platform.claude.com. Until a key is saved, the local model keeps writing your notes.')}
+                {hasKey && <button data-testid="settings-claude-forget" className="settings-link" onClick={() => onKey('')}>{t('Forget key')}</button>}
               </p>
             </div>
             <input id="settings-claude-key" data-testid="settings-claude-key" type="password" value={key} autoComplete="off" spellCheck={false} placeholder={hasKey ? '••••••••' : 'sk-ant-…'}
@@ -424,7 +422,7 @@ function ClaudeSetting({ via, hasKey, onVia, onKey }: { via: ClaudeVia | 'off'; 
           </div>}
         {via === 'cli' &&
           <div className="settings-row">
-            <p className="settings-description settings-row-copy">Usa o Claude Code instalado e conectado neste computador, com o seu próprio plano do Claude. O Yogurt nunca vê o seu login.</p>
+            <p className="settings-description settings-row-copy">{t('Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.')}</p>
           </div>}
       </div>
     </>

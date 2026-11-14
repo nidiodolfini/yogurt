@@ -708,5 +708,12 @@
   "Keep audio recordings after meetings": "Zachowuj nagrania dźwiękowe po spotkaniach",
   "Recording deleted": "Nagranie usunięte",
   "When off, new meetings' audio is deleted once the summary is saved.": "Po wyłączeniu dźwięk nowych spotkań znika po zapisaniu podsumowania.",
-  "New recording": "Nowe nagranie"
+  "New recording": "Nowe nagranie",
+  "Write notes and answers with Claude": "Pisz notatki i odpowiedzi z Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Gdy ta opcja jest włączona, Twoje transkrypcje i notatki są wysyłane do Anthropic w celu napisania notatek i odpowiadania na pytania. Nagrywanie, transkrypcja i wyszukiwanie pozostają na tym komputerze.",
+  "API key": "Klucz API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Klucz jest zapisany i zaszyfrowany na tym komputerze. Wpisz inny, aby go zastąpić.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Z platform.claude.com. Dopóki klucz nie zostanie zapisany, notatki nadal pisze model lokalny.",
+  "Forget key": "Zapomnij klucz",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Korzysta z Claude Code zainstalowanego i zalogowanego na tym komputerze, w ramach Twojego planu Claude. Yogurt nigdy nie widzi Twoich danych logowania."
 }

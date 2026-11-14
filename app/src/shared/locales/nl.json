@@ -675,5 +675,12 @@
   "Keep audio recordings after meetings": "Audio-opnamen na vergaderingen bewaren",
   "Recording deleted": "Opname verwijderd",
   "When off, new meetings' audio is deleted once the summary is saved.": "Indien uit, wordt audio van nieuwe vergaderingen gewist zodra de samenvatting is opgeslagen.",
-  "New recording": "Nieuwe opname"
+  "New recording": "Nieuwe opname",
+  "Write notes and answers with Claude": "Notities en antwoorden schrijven met Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Als dit aanstaat, worden je transcripties en notities naar Anthropic gestuurd om de notities te schrijven en vragen te beantwoorden. Opnemen, transcriberen en zoeken blijven op deze computer.",
+  "API key": "API-sleutel",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Er is een sleutel opgeslagen, versleuteld op deze computer. Typ een andere om hem te vervangen.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Van platform.claude.com. Totdat er een sleutel is opgeslagen, blijft het lokale model je notities schrijven.",
+  "Forget key": "Sleutel vergeten",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Gebruikt de Claude Code die op deze computer is geïnstalleerd en ingelogd, met je eigen Claude-abonnement. Yogurt ziet je login nooit."
 }

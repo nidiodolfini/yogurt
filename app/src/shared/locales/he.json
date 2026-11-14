@@ -687,5 +687,12 @@
   "Keep audio recordings after meetings": "שמירת הקלטות שמע אחרי פגישות",
   "Recording deleted": "ההקלטה נמחקה",
   "When off, new meetings' audio is deleted once the summary is saved.": "כשכבוי, השמע של פגישות חדשות נמחק לאחר שמירת הסיכום.",
-  "New recording": "הקלטה חדשה"
+  "New recording": "הקלטה חדשה",
+  "Write notes and answers with Claude": "כתיבת סיכומים ותשובות עם Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "כשהאפשרות פועלת, התמלולים והסיכומים שלך נשלחים אל Anthropic לצורך כתיבת הסיכומים ומענה על שאלות. ההקלטה, התמלול והחיפוש נשארים במחשב הזה.",
+  "API key": "מפתח API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "מפתח שמור ומוצפן במחשב הזה. יש להקליד מפתח אחר כדי להחליף אותו.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "מ-platform.claude.com. עד שיישמר מפתח, המודל המקומי ממשיך לכתוב את הסיכומים שלך.",
+  "Forget key": "שכח מפתח",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "משתמש ב-Claude Code שמותקן ומחובר במחשב הזה, עם תוכנית Claude שלך. Yogurt אף פעם לא רואה את פרטי ההתחברות שלך."
 }

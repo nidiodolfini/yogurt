@@ -23,9 +23,10 @@ const MAX_TOKENS = 16_000
  * Tokens in a text, guessed from its length: count() is called with a meeting's every line, so asking the API would be
  * a request per line. It decides when a long meeting is split into parts and how much history Ask keeps.
  *
- * TODO(you): your call. length / 3 is safe for Portuguese and transcripts full of names, and wastes some room;
- * length / 4 fits more per request and can run over on dense text.
- * ponytail: a guess, not a count; client.messages.countTokens once per prompt if prompts get cut in the wrong place.
+ * length / 3 runs a little high for Portuguese and for transcripts full of names, so a part is cut early, never late.
+ * It does not need to be exact: CONTEXT is a fifth of what the model reads, so even a guess three times too low
+ * (Chinese, Japanese) still fits. It only moves where a meeting of ten hours or so is split.
+ * shortcut: a guess, not a count, upgrade to client.messages.countTokens (one request per text) if CONTEXT is ever raised near the model's own limit.
  */
 export const estimate = (text: string): number => Math.ceil(text.length / 3)
 

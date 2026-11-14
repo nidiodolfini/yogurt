@@ -675,5 +675,12 @@
   "Keep audio recordings after meetings": "Itago ang mga audio recording pagkatapos ng pulong",
   "Recording deleted": "Nabura ang recording",
   "When off, new meetings' audio is deleted once the summary is saved.": "Kapag naka-off, buburahin ang audio ng bagong pulong pag na-save ang buod.",
-  "New recording": "Bagong recording"
+  "New recording": "Bagong recording",
+  "Write notes and answers with Claude": "Isulat ang mga tala at sagot gamit ang Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Kapag naka-on, ipinapadala sa Anthropic ang iyong mga transcript at tala para isulat ang mga tala at sagutin ang mga tanong. Nananatili sa computer na ito ang pag-record, transkripsyon at paghahanap.",
+  "API key": "API key",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "May naka-save na key, naka-encrypt sa computer na ito. Mag-type ng iba para palitan ito.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Mula sa platform.claude.com. Hangga't walang naka-save na key, ang lokal na modelo pa rin ang magsusulat ng iyong mga tala.",
+  "Forget key": "Kalimutan ang key",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Ginagamit ang Claude Code na naka-install at naka-sign in sa computer na ito, gamit ang sarili mong Claude plan. Hindi kailanman nakikita ng Yogurt ang iyong login."
 }

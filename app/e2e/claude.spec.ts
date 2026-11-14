@@ -12,9 +12,6 @@ async function launch(userData = mkdtempSync(join(tmpdir(), 'yogurt-e2e-'))) {
   return { app, page, userData }
 }
 const saved = (dir: string) => JSON.parse(readFileSync(join(dir, 'settings.json'), 'utf8'))
-// this section is written in Brazilian Portuguese whatever the interface language (Settings.tsx)
-const KEY_SAVED = 'Uma chave está salva'
-const NO_KEY = 'Enquanto não houver chave salva'
 
 // the key is only ever saved encrypted by the computer; a Linux runner without a keyring has nothing to encrypt it with
 test.skip(process.platform === 'linux', 'needs the computer\'s own encryption')
@@ -31,13 +28,13 @@ test('Claude: off until picked, the key saved encrypted and never shown again, t
 
     // an API key picked with none saved: the local model still writes the notes, so everything still stays here
     await via.selectOption('api')
-    await expect(page.getByTestId('settings-claude-key-status')).toContainText(NO_KEY)
+    await expect(page.getByTestId('settings-claude-key-status')).toHaveAttribute('data-has-key', 'false')
     await expect(stays).toBeVisible()
 
     const key = page.getByTestId('settings-claude-key')
     await key.fill('sk-ant-e2e-secret')
     await key.press('Enter')
-    await expect(page.getByTestId('settings-claude-key-status')).toContainText(KEY_SAVED)
+    await expect(page.getByTestId('settings-claude-key-status')).toHaveAttribute('data-has-key', 'true')
     await expect(key).toHaveValue('')
     // Claude writes the notes now: Settings no longer says everything stays on this computer
     await expect(stays).toHaveCount(0)
@@ -58,10 +55,10 @@ test('Claude: off until picked, the key saved encrypted and never shown again, t
     const { page } = b
     await page.getByTestId('settings-open').click()
     await expect(page.getByTestId('settings-claude-via')).toHaveValue('api')
-    await expect(page.getByTestId('settings-claude-key-status')).toContainText(KEY_SAVED)
+    await expect(page.getByTestId('settings-claude-key-status')).toHaveAttribute('data-has-key', 'true')
 
     await page.getByTestId('settings-claude-forget').click()
-    await expect(page.getByTestId('settings-claude-key-status')).toContainText(NO_KEY)
+    await expect(page.getByTestId('settings-claude-key-status')).toHaveAttribute('data-has-key', 'false')
     await expect.poll(() => saved(b.userData).claudeKey).toBeUndefined()
     await expect(page.locator('.settings-privacy')).toBeVisible()
 

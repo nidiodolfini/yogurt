@@ -693,5 +693,12 @@
   "Keep audio recordings after meetings": "Păstrează înregistrările audio după întâlniri",
   "Recording deleted": "Înregistrare ștearsă",
   "When off, new meetings' audio is deleted once the summary is saved.": "Când e oprit, sunetul întâlnirilor noi se șterge după salvarea rezumatului.",
-  "New recording": "Înregistrare nouă"
+  "New recording": "Înregistrare nouă",
+  "Write notes and answers with Claude": "Scrie notițe și răspunsuri cu Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Când este activat, transcrierile și notițele tale sunt trimise către Anthropic pentru a scrie notițele și a răspunde la întrebări. Înregistrarea, transcrierea și căutarea rămân pe acest computer.",
+  "API key": "Cheie API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "O cheie este salvată, criptată pe acest computer. Tastează alta pentru a o înlocui.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "De pe platform.claude.com. Până când este salvată o cheie, modelul local continuă să îți scrie notițele.",
+  "Forget key": "Uită cheia",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Folosește Claude Code instalat și autentificat pe acest computer, cu propriul tău abonament Claude. Yogurt nu îți vede niciodată datele de autentificare."
 }

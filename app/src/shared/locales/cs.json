@@ -709,5 +709,12 @@
   "Keep audio recordings after meetings": "Ponechat zvukové nahrávky po schůzkách",
   "Recording deleted": "Nahrávka smazána",
   "When off, new meetings' audio is deleted once the summary is saved.": "Při vypnutí se zvuk nových schůzek smaže po uložení shrnutí.",
-  "New recording": "Nová nahrávka"
+  "New recording": "Nová nahrávka",
+  "Write notes and answers with Claude": "Psát poznámky a odpovědi pomocí Claude",
+  "When on, your transcripts and notes are sent to Anthropic to write the notes and answer questions. Recording, transcription and search stay on this computer.": "Když je zapnuto, vaše přepisy a poznámky se odesílají společnosti Anthropic, aby napsala poznámky a odpověděla na otázky. Nahrávání, přepis a vyhledávání zůstávají na tomto počítači.",
+  "API key": "Klíč API",
+  "A key is saved, encrypted on this computer. Type another to replace it.": "Klíč je uložen a zašifrován v tomto počítači. Chcete-li ho nahradit, zadejte jiný.",
+  "From platform.claude.com. Until a key is saved, the local model keeps writing your notes.": "Z platform.claude.com. Dokud není klíč uložen, poznámky dál píše místní model.",
+  "Forget key": "Zapomenout klíč",
+  "Uses the Claude Code installed and signed in on this computer, with your own Claude plan. Yogurt never sees your login.": "Používá Claude Code nainstalovaný a přihlášený na tomto počítači s vaším vlastním tarifem Claude. Yogurt vaše přihlašovací údaje nikdy nevidí."
 }
