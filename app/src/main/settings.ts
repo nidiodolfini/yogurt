@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import { isLocale } from '../shared/i18n'
 import { spokenOf, type Spoken } from '../shared/spoken'
+import type { ClaudeVia } from '../shared/types'
 
 /** theme: light or dark regardless of the system; follows the system when left out. language: the interface's, the computer's when left out */
 export type Settings = { theme?: 'light' | 'dark'; language?: string; /** what the person is called in their meetings; their Mac's full name when left out */ myName?: string
@@ -41,7 +42,15 @@ export type Settings = { theme?: 'light' | 'dark'; language?: string; /** what t
   /** the language people speak in meetings: English only unless 'multi' (shared/spoken.ts) */
   spoken?: Spoken
   /** new versions download by themselves; on unless turned off */
-  autoUpdate?: boolean }
+  autoUpdate?: boolean
+  /** notes and answers are written by Claude instead of the local model (notes/claude.ts); the local model when left out */
+  claude?: ClaudeVia
+  /** the Claude API key, encrypted by the computer (safeStorage) and base64'd; never shown again once saved */
+  claudeKey?: string }
+
+/** Claude writes the notes, and how it is reached; nothing when off, or when an API key was picked but none is saved */
+export const claudeVia = (s: Settings): ClaudeVia | undefined =>
+  (s.claude === 'cli' || (s.claude === 'api' && !!s.claudeKey) ? s.claude : undefined)
 
 /** "English only" unless Multi-language was picked */
 export const spokenSetting = (s: Settings): Spoken => spokenOf(s.spoken)

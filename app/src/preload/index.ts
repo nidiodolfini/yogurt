@@ -234,6 +234,8 @@ const api: YogurtApi = {
     setLanguage: (id) => ipcRenderer.invoke('settings:language', id),
     onLanguage: (cb) => { const f = (_e: unknown, locale: string) => cb(locale); ipcRenderer.on('settings:language', f); return () => { ipcRenderer.off('settings:language', f) } },
     setSpoken: (v) => ipcRenderer.invoke('settings:spoken', v),
+    setClaude: (v) => ipcRenderer.invoke('settings:claude', v),
+    setClaudeKey: (key) => ipcRenderer.invoke('settings:claude-key', key),
   },
   search: { query: (q, folder, people) => ipcRenderer.invoke('search:query', q, folder, people), people: () => ipcRenderer.invoke('search:people') },
   folders: {

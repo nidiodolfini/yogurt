@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain, nativeTheme } from 'electron'
+import { BrowserWindow, ipcMain, nativeTheme, safeStorage } from 'electron'
 import { loadSettings, localeOf, recordingReminderOn, spokenSetting, stopsWhenCallEnds, updateSettings } from './settings'
 import { systemLocale } from './locale'
 import { PERMISSION_KINDS, type PermissionKind, type Permissions } from './permissions'
@@ -21,6 +21,8 @@ export function hookPreferences(d: { file: string; permissions: Permissions; ask
   slowStartMs?: number
   /** the spoken language changed: the meeting being recorded follows it where it can */
   onSpoken?: (v: Spoken) => void
+  /** who writes the notes changed (the local model or Claude): jobs waiting for a model may run now */
+  onClaude?: () => void
   /** the permissions this computer has (supportedKinds in platform.ts); a Mac has them all */
   kinds?: readonly PermissionKind[] }) {
   const kinds = d.kinds ?? PERMISSION_KINDS
@@ -49,7 +51,25 @@ export function hookPreferences(d: { file: string; permissions: Permissions; ask
     // what the Mac says, so a change in System Settings shows here
     // locale: every window (main, card, widget) shows the interface language
     // language: the one picked ('' is the Mac's); locale: the one in use; systemLocale: the Mac's, for the picker
-    return { theme: s.theme ?? 'system', openAtLogin: d.loginOn(s.openAtLogin), showInMenuBar: s.showInMenuBar !== false, language: isLocale(s.language) ? s.language : '', locale: localeOf(s, systemLocale()), systemLocale: systemLocale(), myName: s.myName?.trim() || d.macName(), macName: d.macName(), stopWhenCallEnds: stopsWhenCallEnds(s), recordingReminder: recordingReminderOn(s), keepRecordings: s.keepRecordings !== false, jargon: cleanJargon(s.jargon), spoken: spokenSetting(s) }
+    return { theme: s.theme ?? 'system', openAtLogin: d.loginOn(s.openAtLogin), showInMenuBar: s.showInMenuBar !== false, language: isLocale(s.language) ? s.language : '', locale: localeOf(s, systemLocale()), systemLocale: systemLocale(), myName: s.myName?.trim() || d.macName(), macName: d.macName(), stopWhenCallEnds: stopsWhenCallEnds(s), recordingReminder: recordingReminderOn(s), keepRecordings: s.keepRecordings !== false, jargon: cleanJargon(s.jargon), spoken: spokenSetting(s),
+      // the key itself never goes back to the page: only that one is saved
+      claude: s.claude === 'api' || s.claude === 'cli' ? s.claude : 'off', claudeHasKey: !!s.claudeKey }
+  })
+  // off is the default, so only Claude is written down
+  ipcMain.handle('settings:claude', (_e, v: unknown) => {
+    if (v !== 'off' && v !== 'api' && v !== 'cli') return
+    updateSettings(d.file, { claude: v === 'off' ? undefined : v })
+    d.onClaude?.()
+  })
+  // kept encrypted by the computer (the Keychain, DPAPI, the keyring); blank forgets it. True when one is now saved
+  ipcMain.handle('settings:claude-key', (_e, v: unknown) => {
+    if (typeof v !== 'string' || v.length > 500) return !!loadSettings(d.file).claudeKey
+    const key = v.trim()
+    // never written down in the clear: without the computer's encryption nothing is saved
+    if (key && !safeStorage.isEncryptionAvailable()) return false
+    updateSettings(d.file, { claudeKey: key ? safeStorage.encryptString(key).toString('base64') : undefined })
+    d.onClaude?.()
+    return !!key
   })
   // what the person is called in meetings (who "You" is when naming voices); blank: the Mac's full name again
   ipcMain.handle('settings:name', (_e, v: unknown) => {

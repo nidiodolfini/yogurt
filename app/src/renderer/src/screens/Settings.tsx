@@ -1,7 +1,7 @@
 import { LoadingContent } from '../components/LoadingContent'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Check, ChevronDown, Copy, Download, ExternalLink, Globe, Lock, Upload } from 'lucide-react'
-import type { Access, McpStatus, PermissionKind, PermissionStatus, SetupState, Theme, UpdateStatus } from '../../../shared/types'
+import type { Access, ClaudeVia, McpStatus, PermissionKind, PermissionStatus, SetupState, Theme, UpdateStatus } from '../../../shared/types'
 import { notesDownloadText, notesUpgradeSize } from '../notesSetup'
 import { permissionCopy } from '../permissionCopy'
 import { LOCALES, t } from '../../../shared/i18n'
@@ -25,7 +25,7 @@ const trayLabel = () => osWords({ mac: t('Show Yogurt in the menu bar'), windows
 /** focus: the setting a toast's Settings button opens, recordings or notes-model */
 export function Settings({ revision = 0, focus }: { revision?: number; focus?: string }) {
   const [perms, setPerms] = useState<PermissionStatus>()
-  const [prefs, setPrefs] = useState<{ theme: Theme; openAtLogin: boolean; showInMenuBar: boolean; myName: string; macName: string; stopWhenCallEnds: boolean; recordingReminder: boolean; keepRecordings: boolean }>()
+  const [prefs, setPrefs] = useState<{ theme: Theme; openAtLogin: boolean; showInMenuBar: boolean; myName: string; macName: string; stopWhenCallEnds: boolean; recordingReminder: boolean; keepRecordings: boolean; claude: ClaudeVia | 'off'; claudeHasKey: boolean }>()
   const [name, setName] = useState('')
   const [generalReady, setGeneralReady] = useState(false)
   const scroll = useScrollMemory<HTMLDivElement>('settings', !!prefs && !!perms)
@@ -57,6 +57,10 @@ export function Settings({ revision = 0, focus }: { revision?: number; focus?: s
     const on = !prefs.stopWhenCallEnds
     setPrefs({ ...prefs, stopWhenCallEnds: on }); void window.yogurt.settings.setStopWhenCallEnds(on)
   }
+  const claudeVia = (v: ClaudeVia | 'off') => { setPrefs((p) => p && { ...p, claude: v }); void window.yogurt.settings.setClaude(v) }
+  const claudeKey = (key: string) => { void window.yogurt.settings.setClaudeKey(key).then((saved) => setPrefs((p) => p && { ...p, claudeHasKey: saved })) }
+  /** Claude writes the notes now: an API key picked with none saved still leaves the local model writing them */
+  const claudeOn = prefs?.claude === 'cli' || (prefs?.claude === 'api' && prefs.claudeHasKey)
 
   return (
     <div data-testid="settings" className="settings-screen">
@@ -147,6 +151,8 @@ export function Settings({ revision = 0, focus }: { revision?: number; focus?: s
 
           <AiApps />
 
+          {prefs && <ClaudeSetting via={prefs.claude} hasKey={prefs.claudeHasKey} onVia={claudeVia} onKey={claudeKey} />}
+
           <Updates />
 
           <h2 className="settings-section-heading">{t('Keyboard shortcuts')}</h2>
@@ -155,7 +161,8 @@ export function Settings({ revision = 0, focus }: { revision?: number; focus?: s
               <div className="settings-row" key={keys}><dt>{label}</dt><dd><kbd>{keys}</kbd></dd></div>)}
           </dl>
 
-          <p className="settings-privacy"><Lock size={12} aria-hidden="true" />{osWords({ mac: t('Your meetings, notes and audio stay on this Mac.'), other: t('Your meetings, notes and audio stay on this computer.') })}</p>
+          {/* not said while Claude writes the notes: transcripts and notes then go to Anthropic */}
+          {!claudeOn && <p className="settings-privacy"><Lock size={12} aria-hidden="true" />{osWords({ mac: t('Your meetings, notes and audio stay on this Mac.'), other: t('Your meetings, notes and audio stay on this computer.') })}</p>}
         </div>
       </div>
     </div>
@@ -371,6 +378,55 @@ function AiApps() {
           </div>
         }
       </div></LoadingContent>
+    </>
+  )
+}
+
+/**
+ * Claude in place of the local model for notes and answers: off until picked, and it says what then leaves the computer.
+ * ponytail: this fork's own section, written in Brazilian Portuguese whatever the interface language; wrap its text in t()
+ * (English keys) and add it to every locales/*.json to have it follow the language picked.
+ */
+function ClaudeSetting({ via, hasKey, onVia, onKey }: { via: ClaudeVia | 'off'; hasKey: boolean; onVia(v: ClaudeVia | 'off'): void; /** blank forgets the saved key */ onKey(key: string): void }) {
+  const [key, setKey] = useState('')
+  /** saved when they leave the field or press Return; an empty field keeps the key already saved */
+  const save = () => { const k = key.trim(); if (!k) return; setKey(''); onKey(k) }
+  return (
+    <>
+      <h2 className="settings-section-heading">Claude</h2>
+      <div data-testid="settings-claude" className="settings-group">
+        <div className="settings-row">
+          <div className="settings-row-copy">
+            <label htmlFor="settings-claude-via" className="settings-label">Escrever notas e respostas com o Claude</label>
+            <p className="settings-description">Com isto ligado, suas transcrições e notas são enviadas à Anthropic para escrever as notas e responder perguntas. Gravação, transcrição e busca continuam neste computador.</p>
+          </div>
+          <span className="settings-select-wrap">
+            <select id="settings-claude-via" data-testid="settings-claude-via" value={via} onChange={(e) => onVia(e.target.value as ClaudeVia | 'off')} className="settings-select">
+              <option value="off">Desligado</option>
+              <option value="api">Chave de API</option>
+              <option value="cli">Claude Code</option>
+            </select>
+            <ChevronDown size={14} aria-hidden="true" />
+          </span>
+        </div>
+        {via === 'api' &&
+          <div className="settings-row">
+            <div className="settings-row-copy">
+              <label htmlFor="settings-claude-key" className="settings-label">Chave de API</label>
+              <p data-testid="settings-claude-key-status" className="settings-description">
+                {hasKey ? 'Uma chave está salva, cifrada neste computador. Digite outra para substituir.' : 'De platform.claude.com. Enquanto não houver chave salva, o modelo local continua escrevendo suas notas.'}
+                {hasKey && <button data-testid="settings-claude-forget" className="settings-link" onClick={() => onKey('')}>Esquecer chave</button>}
+              </p>
+            </div>
+            <input id="settings-claude-key" data-testid="settings-claude-key" type="password" value={key} autoComplete="off" spellCheck={false} placeholder={hasKey ? '••••••••' : 'sk-ant-…'}
+              onChange={(e) => setKey(e.target.value)} onBlur={save} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur() }}
+              className="settings-name-field" />
+          </div>}
+        {via === 'cli' &&
+          <div className="settings-row">
+            <p className="settings-description settings-row-copy">Usa o Claude Code instalado e conectado neste computador, com o seu próprio plano do Claude. O Yogurt nunca vê o seu login.</p>
+          </div>}
+      </div>
     </>
   )
 }

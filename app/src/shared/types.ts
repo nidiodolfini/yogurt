@@ -16,6 +16,8 @@ export type MissingPermission = { kind: PermissionKind; status: Access; essentia
 export type DeleteRecordingResult = 'deleted' | 'missing' | 'recording' | 'not-transcribed' | 'kept' | 'failed'
 
 export type Theme = 'light' | 'dark' | 'system'
+/** how Claude is reached when it writes the notes: the person's API key, or the Claude Code signed in on this computer */
+export type ClaudeVia = 'api' | 'cli'
 /** The capture has stopped, but its final database state may still need an explicit retry. */
 export type MeetingView = Meeting & { stopSavePending?: true; paused?: true }
 export type MeetingCard = StoredMeetingCard & { paused?: true }
@@ -247,7 +249,7 @@ export type YogurtApi = {
   }
   settings: {
     /** myName: what the person is called in meetings (their Mac's full name, macName, when they never changed it) */
-    get(): Promise<{ theme: Theme; openAtLogin: boolean; showInMenuBar: boolean; /** the language picked; '' follows the Mac */ language: string; /** the language in use */ locale: string; /** the Mac's language, among Yogurt's */ systemLocale: string; myName: string; macName: string; /** a recording stops by itself when its call ends (off: ask first) */ stopWhenCallEnds: boolean; recordingReminder: boolean; keepRecordings: boolean; /** personal jargon, spelled as typed */ jargon: string[]; /** the language people speak in meetings */ spoken: import('./spoken').Spoken }>
+    get(): Promise<{ theme: Theme; openAtLogin: boolean; showInMenuBar: boolean; /** the language picked; '' follows the Mac */ language: string; /** the language in use */ locale: string; /** the Mac's language, among Yogurt's */ systemLocale: string; myName: string; macName: string; /** a recording stops by itself when its call ends (off: ask first) */ stopWhenCallEnds: boolean; recordingReminder: boolean; keepRecordings: boolean; /** personal jargon, spelled as typed */ jargon: string[]; /** the language people speak in meetings */ spoken: import('./spoken').Spoken; /** who writes notes and answers */ claude: ClaudeVia | 'off'; /** a Claude API key is saved */ claudeHasKey: boolean }>
     /** blank goes back to the Mac's full name */
     setName(name: string): Promise<void>
     setTheme(v: Theme): Promise<void>
@@ -264,6 +266,10 @@ export type YogurtApi = {
     onLanguage(cb: (locale: string) => void): () => void
     /** English only or Multi-language: the meeting being recorded and the next ones */
     setSpoken(v: import('./spoken').Spoken): Promise<void>
+    /** who writes notes and answers: the local model ('off'), or Claude by API key or by Claude Code */
+    setClaude(v: ClaudeVia | 'off'): Promise<void>
+    /** saves the Claude API key (blank forgets it); true when one is now saved. It is never read back */
+    setClaudeKey(key: string): Promise<boolean>
   }
   /** finds meetings by date, title, attendees, folders, transcript and notes; nothing typed: the latest. folder: only the meetings in it */
   search: { query(q: string, folder?: string, people?: Person[]): Promise<SearchResult[]>; people(): Promise<Person[]> }
