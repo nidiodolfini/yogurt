@@ -39,7 +39,7 @@ export type Settings = { theme?: 'light' | 'dark'; language?: string; /** what t
   hiddenCalendarIds?: string[]
   /** names, products and acronyms to spell right in transcripts and notes (shared/jargon.ts) */
   jargon?: string[]
-  /** the language people speak in meetings: English only unless 'multi' (shared/spoken.ts) */
+  /** the language people speak in meetings: English only when left out (shared/spoken.ts) */
   spoken?: Spoken
   /** new versions download by themselves; on unless turned off */
   autoUpdate?: boolean

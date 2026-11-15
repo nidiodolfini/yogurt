@@ -111,10 +111,10 @@ export function hookPreferences(d: { file: string; permissions: Permissions; ask
     updateSettings(d.file, { jargon: jargon.length ? jargon : undefined })
     return jargon
   })
-  // English only is the default, so only Multi-language is written down
+  // English only is the default, so only another choice is written down
   ipcMain.handle('settings:spoken', (_e, v: unknown) => {
     if (!SPOKEN.includes(v as Spoken)) return
-    updateSettings(d.file, { spoken: v === 'multi' ? 'multi' : undefined })
+    updateSettings(d.file, { spoken: v === 'en' ? undefined : v as Spoken })
     d.onSpoken?.(v as Spoken)
   })
   ipcMain.handle('settings:menu-bar', (_e, on: unknown) => {

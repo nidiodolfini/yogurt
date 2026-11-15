@@ -63,4 +63,12 @@ describe('the spoken language picked in Yogurt', () => {
     expect(speechFits('en', 'es-ES')).toBe(false)
     expect(speechFits('multi', 'es-ES')).toBe(true)
   })
+  it('Portuguese listens in Portuguese, Brazil\'s when the interface does not say which, or not at all without a model', () => {
+    const supported = ['en-US', 'pt-PT', 'pt-BR', 'es-ES']
+    expect(wantedSpeechLocale({ spoken: 'pt', supported, last: 'english', ui: 'pt-PT' })).toBe('pt-PT')
+    expect(wantedSpeechLocale({ spoken: 'pt', supported: ['en-US', 'es-ES'], last: null, ui: 'pt-BR' })).toBeNull()
+    expect(wantedSpeechLocale({ spoken: 'pt', supported, last: null, ui: 'en-US' })).toMatch(/^pt-/)
+    expect(speechFits('pt', 'pt-BR')).toBe(true)
+    expect(speechFits('pt', 'en-US')).toBe(false)
+  })
 })

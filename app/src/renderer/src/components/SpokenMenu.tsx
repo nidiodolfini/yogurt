@@ -2,10 +2,16 @@ import { usePopoverPresence } from '../motion'
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { Check, ChevronDown, Info, Languages } from 'lucide-react'
 import { WHISPER_LANGUAGES, type Spoken } from '../../../shared/spoken'
-import { t } from '../../../shared/i18n'
+import { language, t } from '../../../shared/i18n'
+
+/** "Português", "Portuguese", "Portugiesisch": named by the system in the interface's language, so no table has to carry it */
+export const portuguese = (): string => {
+  const name = new Intl.DisplayNames([language()], { type: 'language' }).of('pt') ?? 'Português'
+  return name.charAt(0).toLocaleUpperCase(language()) + name.slice(1)
+}
 
 /** the names shown on the chip and in Settings */
-export const spokenName = (s: Spoken): string => (s === 'en' ? t('English') : t('Multi-language'))
+export const spokenName = (s: Spoken): string => (s === 'en' ? t('English') : s === 'pt' ? portuguese() : t('Multi-language'))
 
 /**
  * The spoken language under the note's bar, beside the mic, as a menu: English only (faster, nothing guessed) or
@@ -76,6 +82,10 @@ export function SpokenMenu() {
               <span className="text-xs text-muted">{t('Highest quality')}</span>
             </span>
             {tick(spoken === 'en')}
+          </button>
+          <button role="menuitemradio" aria-checked={spoken === 'pt'} data-testid="spoken-pt" onClick={() => choose('pt')} className={row}>
+            <span>{portuguese()}</span>
+            {tick(spoken === 'pt')}
           </button>
           <button role="menuitemradio" aria-checked={spoken === 'multi'} data-testid="spoken-multi" onClick={() => choose('multi')} className={row}>
             <span className="flex min-w-0 flex-col">

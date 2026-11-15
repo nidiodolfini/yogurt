@@ -74,7 +74,7 @@ function decide(): string | null {
  */
 export function spokenChanged() {
   const spoken = spokenNow()
-  for (const s of sessions.values()) if (s.speech && !speechFits(spoken, s.speech)) speechOff(s, 'English only was picked')
+  for (const s of sessions.values()) if (s.speech && !speechFits(spoken, s.speech)) speechOff(s, 'another spoken language was picked')
 }
 /** segments and hideSegments: the echo sweep after the meeting (tests may leave them out) */
 type SessionStore = Pick<Store, 'updateMeeting'> & Partial<Pick<Store, 'segments' | 'hideSegments' | 'meeting'>>

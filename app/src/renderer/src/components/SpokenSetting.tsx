@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 import { Languages } from 'lucide-react'
 import { SPOKEN, type Spoken } from '../../../shared/spoken'
 import { t } from '../../../shared/i18n'
+import { portuguese } from './SpokenMenu'
 
-const label = (s: Spoken) => (s === 'en' ? t('English only') : t('Multi-language'))
+const label = (s: Spoken) => (s === 'en' ? t('English only') : s === 'pt' ? portuguese() : t('Multi-language'))
 
 /** Settings → Language: the language people speak in meetings, the same choice as the picker under a note */
 export function SpokenSetting() {

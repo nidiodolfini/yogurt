@@ -62,7 +62,11 @@ test('the spoken language picker: English only by default, Multi-language for th
     await expect(page.getByTestId('settings-spoken-en')).toHaveAttribute('aria-checked', 'true')
     // English only is the default, so it is not written down
     await expect.poll(() => saved(a.userData)).toBeUndefined()
+    // Portuguese sits between the two, and is written down as it is
     await page.getByTestId('settings-spoken-en').press('ArrowRight')
+    await expect(page.getByTestId('settings-spoken-pt')).toHaveAttribute('aria-checked', 'true')
+    await expect.poll(() => saved(a.userData)).toBe('pt')
+    await page.getByTestId('settings-spoken-pt').press('ArrowRight')
     await expect(page.getByTestId('settings-spoken-multi')).toHaveAttribute('aria-checked', 'true')
     await expect.poll(focused).toBe('settings-spoken-multi')
     await expect.poll(() => saved(a.userData)).toBe('multi')
