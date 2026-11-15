@@ -19,6 +19,8 @@ export type Llm = {
   chat(prompt: string, onToken: (text: string) => void, o?: { summary?: boolean; maxTokens?: number; before?: string[]; /** colder sampling for an answer that must come out the same each time */ temperature?: number }): Promise<string>
   /** reads the start of a prompt into the model without answering, so a prompt that starts the same way later reads only the rest */
   readAhead?(text: string, signal?: AbortSignal): Promise<void>
+  /** a large model (Claude): the notes prompt asks it for more than a small local model can be trusted with (enhancePrompt) */
+  thorough?: boolean
 }
 
 /** A long meeting's part summarised while it was recorded: its transcript lines and the summary */
@@ -64,6 +66,8 @@ type PromptInput = {
   spelling?: string
   /** everyone was heard on the one mic (a meeting in a room): every line says "You" whoever spoke */
   oneMic?: boolean
+  /** the writer is a large model (Llm.thorough): mishearings put right, the why of each decision, open questions, every commitment */
+  thorough?: boolean
 }
 
 /**
@@ -124,6 +128,14 @@ export function enhancePrompt(i: PromptInput): string {
       '- Their notes can be a plan or a script made before the meeting: a question or step in it goes in only if the transcript shows it was asked or done, with what came of it.',
     ] : []),
     '- Use only what was said or typed. Never make anything up.',
+    // a small local model follows these badly (it invents the "why", and "fixes" words that were right), so only a large one gets them
+    ...(i.thorough ? [
+      '- The transcript was written by speech recognition, which mishears names, products, numbers and technical words. Where the rest of the meeting, the people invited or the typed notes make clear what was really said, write that. Where it stays unclear, leave the doubtful word out rather than guess.',
+      '- Go deeper than a summary: under a point, "  - " bullets with the reasoning, the options that were weighed and why one was dropped, and the exact numbers, dates and names.',
+      '- Every decision says who made it and why, as "Decided: …" in its topic.',
+      `- Before the next steps, "## Open questions" (in ${lang}) only if something was left unanswered or unresolved: one bullet each, with who needs to answer it when that was said. Otherwise leave the section out.`,
+      '- The next steps include what someone took on in passing ("I\'ll check", "let me send that"), and what a step waits on when that was said.',
+    ] : []),
     `- Last, "## Next steps" (in ${lang}) only if someone said they would do something after the meeting: one bullet each, as "- **Name:** what they will do, by when" (when only if it was said), "**You:**" for the person these notes are for, plain words for someone without a name, like "**The designer:**". Leave out jokes and personal errands. Otherwise leave the section out.`,
     '',
     'The shape, with made-up placeholders:',
@@ -357,7 +369,7 @@ export async function enhance(input: EnhanceInput, llm: Llm, onToken: (text: str
   let first = Infinity, last = -Infinity
   for (const s of input.segments) { first = Math.min(first, s.startMs); last = Math.max(last, s.endMs) }
   const minutes = input.segments.length ? (last - first) / 60_000 : undefined
-  const base = { title: input.meeting.title, attendees: input.meeting.attendees, mine: input.mine, language, minutes, me: input.me, spelling: input.words && spellingLine(input.words), oneMic: oneMic(input.segments) }
+  const base = { title: input.meeting.title, attendees: input.meeting.attendees, mine: input.mine, language, minutes, me: input.me, spelling: input.words && spellingLine(input.words), oneMic: oneMic(input.segments), thorough: llm.thorough }
   const segments = input.words ? input.segments.map((x) => ({ ...x, text: respell(x.text, input.words!) })) : input.segments
   let transcript = transcriptText(segments)
   let parts = false

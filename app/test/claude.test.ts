@@ -140,6 +140,8 @@ it('sizes prompts without the local model: no reading ahead, a guess for tokens'
   const llm = claudeLlm({ via: 'cli' })
   expect(llm.readAhead).toBeUndefined()
   expect(llm.contextSize).toBeGreaterThan(32_768)
+  // the notes prompt asks Claude for more than the local model (enhancePrompt)
+  expect(llm.thorough).toBe(true)
   const [empty, short, long] = await llm.count(['', 'abc', 'a'.repeat(3000)])
   expect(empty).toBe(0)
   expect(short).toBeGreaterThan(0)

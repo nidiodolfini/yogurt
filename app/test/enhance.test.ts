@@ -18,6 +18,23 @@ describe('enhancePrompt', () => {
     expect(p).toContain('## ')
     expect(p).toContain('**')
   })
+  it('asks a large model for more, after the transcript, and the local model for the same as before', async () => {
+    const more = enhancePrompt({ ...base, thorough: true })
+    for (const rule of ['speech recognition', 'who made it and why', '"## Open questions" (in Spanish)', 'in passing']) {
+      expect(more).toContain(rule)
+      expect(enhancePrompt(base)).not.toContain(rule)
+    }
+    // reading ahead relies on the prompt starting the same way whoever writes
+    expect(more.indexOf('speech recognition')).toBeGreaterThan(more.indexOf('</transcript>'))
+    expect(more.lastIndexOf('"## Next steps"')).toBeGreaterThan(more.indexOf('"## Open questions"'))
+    const prompts: string[] = []
+    const llm = (thorough?: boolean): Llm => ({ contextSize: 100_000, thorough, count: async (xs) => xs.map(words), chat: async (p) => { prompts.push(p); return '## A\n- **You:** b' } })
+    const input = { meeting: { title: 'Launch sync', attendees: [] }, mine: '', segments: [seg('me', 0, 'Hi.')], language: 'es' }
+    await enhance(input, llm(true), () => {})
+    await enhance(input, llm(), () => {})
+    expect(prompts[0]).toContain('"## Open questions"')
+    expect(prompts[1]).not.toContain('"## Open questions"')
+  })
   it('without a known language, asks for the transcript\'s', () => {
     const p = enhancePrompt({ ...base, language: '' })
     expect(p).toMatch(/language .*transcript/i)

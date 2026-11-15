@@ -108,6 +108,7 @@ export function claudeLlm(o: { via: ClaudeVia; apiKey?: string; signal?: AbortSi
   const how = o.via === 'api' ? 'an API key' : 'Claude Code'
   return {
     contextSize: CONTEXT,
+    thorough: true,
     count: async (texts) => texts.map(estimate),
     chat: async (prompt, onToken, opts) => {
       const t0 = performance.now()
